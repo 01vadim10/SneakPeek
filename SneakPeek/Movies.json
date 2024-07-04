@@ -1,0 +1,49 @@
+{
+  "movies": [
+    {
+      "title": "Inception",
+      "wait": "no wait",
+      "description": "A skilled thief, the absolute best in the dangerous art of extraction, steals valuable secrets from deep within the subconscious during the dream state.",
+      "release_date": "2010-07-16",
+      "genre": "Science Fiction",
+      "director": "Christopher Nolan",
+      "rating": 8.8
+    },
+    {
+      "title": "The Matrix",
+      "wait": "no wait",
+      "description": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
+      "release_date": "1999-03-31",
+      "genre": "Action, Science Fiction",
+      "directors": [ "Lana Wachowski", "Lilly Wachowski" ],
+      "rating": 8.7
+    },
+    {
+      "title": "Parasite",
+      "wait": "wait",
+      "description": "A poor family schemes to become employed by a wealthy family and infiltrate their household by posing as unrelated, highly qualified individuals.",
+      "release_date": "2019-05-30",
+      "genre": "Thriller, Drama",
+      "director": "Bong Joon-ho",
+      "rating": 8.6
+    },
+    {
+      "title": "Interstellar",
+      "wait": "no wait",
+      "description": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+      "release_date": "2014-11-07",
+      "genre": "Science Fiction, Adventure",
+      "director": "Christopher Nolan",
+      "rating": 8.6
+    },
+    {
+      "title": "The Godfather",
+      "wait": "wait",
+      "description": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+      "release_date": "1972-03-24",
+      "genre": "Crime, Drama",
+      "director": "Francis Ford Coppola",
+      "rating": 9.2
+    }
+  ]
+}
