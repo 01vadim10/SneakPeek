@@ -40,7 +40,6 @@ namespace SneakPeek.Controllers
                     return Content(jsonResult, "application/json"); // Return string in json format
                 } 
 
-
             }
             catch (IOException ex)
             {
