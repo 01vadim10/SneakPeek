@@ -1,9 +1,8 @@
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace SneakPeak.Tests
 {
-    public class MoviesControllerTests
+    public class MoviesControllerTests : IClassFixture<WebApplicationFactory<Program>>
     {
         private readonly WebApplicationFactory<Program> _factory;
 
@@ -12,11 +11,11 @@ namespace SneakPeak.Tests
             _factory = factory;
         }
 
-        [Theory]
-        [InlineData("/movies")]
-        public async Task Get_MoviesEndpointsReturnSuccessAndCorrectContentType(string url)
+        [Fact]
+        public async Task Get_MoviesEndpointsReturnSuccessAndCorrectContentType()
         {
             // Arrange
+            const string url = "/movies";
             var client = _factory.CreateClient();
 
             // Act
