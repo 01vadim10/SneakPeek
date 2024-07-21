@@ -37,7 +37,7 @@ namespace SneakPeek.Controllers
                     {
                         WriteIndented = true // Makes this string formatted correctly
                     });
-                    return Content(jsonResult, "application/json"); // Return string in json format
+                    return Content(jsonResult, "text/json; charset=utf-8"); // Return string in json format
                 } 
 
             }
