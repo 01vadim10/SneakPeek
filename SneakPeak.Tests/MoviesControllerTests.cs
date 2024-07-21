@@ -1,9 +1,10 @@
 using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Microsoft.AspNetCore.Mvc.Testing;
+using FluentAssertions;
 
 namespace SneakPeak.Tests
 {
-    public class MoviesControllerTests
+    public class MoviesControllerTests : IClassFixture<WebApplicationFactory<Program>>
     {
         private readonly WebApplicationFactory<Program> _factory;
 
@@ -12,20 +13,17 @@ namespace SneakPeak.Tests
             _factory = factory;
         }
 
-        [Theory]
-        [InlineData("/movies")]
-        public async Task Get_MoviesEndpointsReturnSuccessAndCorrectContentType(string url)
+        [Fact]
+        public async Task Get_MoviesEndpointsReturnSuccessAndCorrectContentType()
         {
-            // Arrange
+            const string url = "/movies";
             var client = _factory.CreateClient();
 
-            // Act
             var response = await client.GetAsync(url);
 
-            // Assert
             response.EnsureSuccessStatusCode();
             Assert.Equal("text/json; charset=utf-8",
-                response.Content.Headers.ContentType.ToString());
+            response.Content.Headers.ContentType.ToString());
         }
     }
 }
