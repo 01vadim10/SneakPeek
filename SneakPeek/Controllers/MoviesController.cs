@@ -20,7 +20,7 @@ namespace SneakPeek.Controllers
         public MoviesController(IWebHostEnvironment hostingEnvironment)
         {
             _hostingEnvironment = hostingEnvironment;
-        }// to determine the path relative to the project root
+        }
 
         [HttpGet (Name = "movies")]
         public async Task<IActionResult> Get()
@@ -35,9 +35,9 @@ namespace SneakPeek.Controllers
                     List<Movie> movies = await JsonSerializer.DeserializeAsync<List<Movie>>(openStream);
                     string jsonResult = JsonSerializer.Serialize(movies, new JsonSerializerOptions
                     {
-                        WriteIndented = true // Makes this string formatted correctly
+                        WriteIndented = true
                     });
-                    return Content(jsonResult, "application/json"); // Return string in json format
+                    return Content(jsonResult, "text/json; charset=utf-8"); 
                 } 
 
             }
