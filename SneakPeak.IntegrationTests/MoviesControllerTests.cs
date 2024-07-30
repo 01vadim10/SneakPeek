@@ -1,4 +1,7 @@
+using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Microsoft.AspNetCore.Mvc.Testing;
+using FluentAssertions;
+using System.Net;
 
 namespace SneakPeak.Tests
 {
@@ -14,17 +17,13 @@ namespace SneakPeak.Tests
         [Fact]
         public async Task Get_MoviesEndpointsReturnSuccessAndCorrectContentType()
         {
-            // Arrange
             const string url = "/movies";
             var client = _factory.CreateClient();
 
-            // Act
             var response = await client.GetAsync(url);
 
-            // Assert
-            response.EnsureSuccessStatusCode();
-            Assert.Equal("text/json; charset=utf-8",
-                response.Content.Headers.ContentType.ToString());
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            response.Content.Headers.ContentType.ToString().Should().Be("application/json; charset=utf-8");
         }
     }
 }
