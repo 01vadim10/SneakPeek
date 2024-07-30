@@ -5,7 +5,9 @@ VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SneakPeek", "SneakPeek.csproj", "{5AC3F1D4-8CF0-44BC-9575-AE18C74E1641}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SneakPeak.Tests", "..\SneakPeak.Tests\SneakPeak.Tests.csproj", "{B1190165-9A25-4F78-8786-823EA4F3D9E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SneakPeak.Tests", "..\SneakPeak.Tests\SneakPeak.Tests.csproj", "{B1190165-9A25-4F78-8786-823EA4F3D9E0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SneakPeak.IntegrationTests", "..\SneakPeak.IntegrationTests\SneakPeak.IntegrationTests.csproj", "{D581365D-AE39-41EB-9858-6AE69F956AF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B1190165-9A25-4F78-8786-823EA4F3D9E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1190165-9A25-4F78-8786-823EA4F3D9E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1190165-9A25-4F78-8786-823EA4F3D9E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D581365D-AE39-41EB-9858-6AE69F956AF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D581365D-AE39-41EB-9858-6AE69F956AF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D581365D-AE39-41EB-9858-6AE69F956AF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D581365D-AE39-41EB-9858-6AE69F956AF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
