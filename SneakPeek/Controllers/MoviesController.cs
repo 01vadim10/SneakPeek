@@ -1,50 +1,45 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SneakPeek.Models;
-using System.Collections.Generic;
-using System.IO;
-using System;
 using System.Text.Json;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
-namespace SneakPeek.Controllers
+
+namespace SneakPeek.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+
+public class MoviesController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
+    private readonly IWebHostEnvironment _hostingEnvironment;
 
-    public class MoviesController : ControllerBase
+    public MoviesController(IWebHostEnvironment hostingEnvironment)
     {
-        private readonly IWebHostEnvironment _hostingEnvironment;
+        _hostingEnvironment = hostingEnvironment;
+    }
 
-        public MoviesController(IWebHostEnvironment hostingEnvironment)
+    [HttpGet(Name = "movies")]
+    public async Task<IActionResult> Get()
+    {
+        string filePath = Path.Combine(_hostingEnvironment.ContentRootPath, "Movies.json");
+
+        try
         {
-            _hostingEnvironment = hostingEnvironment;
-        }
-
-        [HttpGet (Name = "movies")]
-        public async Task<IActionResult> Get()
-        {
-            string filePath = Path.Combine(_hostingEnvironment.ContentRootPath, "Movies.json");
-
-            try
+            using (FileStream openStream = System.IO.File.OpenRead(filePath))
             {
-                using (FileStream openStream = System.IO.File.OpenRead(filePath))
+                List<Movie> movies = await JsonSerializer.DeserializeAsync<List<Movie>>(openStream);
+                string jsonResult = JsonSerializer.Serialize(movies, new JsonSerializerOptions
                 {
-                    List<Movie> movies = await JsonSerializer.DeserializeAsync<List<Movie>>(openStream);
-                    string jsonResult = JsonSerializer.Serialize(movies, new JsonSerializerOptions
-                    {
-                        WriteIndented = true
-                    });
-                    return Content(jsonResult, "application/json; charset=utf-8"); 
-                } 
+                    WriteIndented = true
+                });
+                return Content(jsonResult, "application/json; charset=utf-8");
             }
-            catch (IOException ex)
-            {
-                return StatusCode(500,$"Internal server error: {ex.Message}");
-            }
-            catch (JsonException ex)
-            {
-                return BadRequest($"JSON parsing error: {ex.Message}");
-            }
+        }
+        catch (IOException ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+        catch (JsonException ex)
+        {
+            return BadRequest($"JSON parsing error: {ex.Message}");
         }
     }
 }
