@@ -22,8 +22,9 @@ namespace SneakPeak.Tests
 
             var response = await client.GetAsync(url);
 
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
-            response.Content.Headers.ContentType.ToString().Should().Be("application/json; charset=utf-8");
+            response.EnsureSuccessStatusCode();
+            Assert.Equal("text/json; charset=utf-8",
+            response.Content.Headers.ContentType.ToString());
         }
     }
 }
