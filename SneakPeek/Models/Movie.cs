@@ -10,5 +10,4 @@
         public List<string> director { get; set; }
         public double rating { get; set; }
     }
-
 }
