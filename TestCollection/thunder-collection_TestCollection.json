@@ -1,0 +1,31 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "TestCollection",
+    "collectionId": "0909e91c-1327-491d-830b-bf3e95d5c83a",
+    "dateExported": "2024-07-21T10:17:13.526Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "ec00bd62-fb14-4afc-8633-39e4137d1424",
+            "name": "/movies",
+            "containerId": "",
+            "created": "2024-07-20T15:47:06.369Z",
+            "sortNum": 30000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "7dd6da31-23dd-4aee-8b17-064720d52253",
+            "colId": "0909e91c-1327-491d-830b-bf3e95d5c83a",
+            "containerId": "ec00bd62-fb14-4afc-8633-39e4137d1424",
+            "name": "http://localhost:5098/",
+            "url": "http://localhost:5098/movies",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-07-20T17:02:45.899Z",
+            "modified": "2024-07-20T17:02:45.899Z",
+            "headers": []
+        }
+    ],
+    "ref": "iyak--txkAWT09MVUPpvLBcHTht8GN1tSC1i0nzXOE-FkYmuHyWyKUP8yTI3gR7LU1K2c0-rvXWon3JgjThWgg"
+}
