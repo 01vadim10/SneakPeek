@@ -1,34 +1,33 @@
 using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Microsoft.AspNetCore.Mvc.Testing;
 
-namespace SneakPeak.Tests
+namespace SneakPeak.Tests;
+
+public class GeneratedDefaultEndpointTest : IClassFixture<WebApplicationFactory<Program>>
 {
-    public class DefaultEndpointTests : IClassFixture<WebApplicationFactory<Program>>
+    private readonly WebApplicationFactory<Program> _factory;
+    public GeneratedDefaultEndpointTest(WebApplicationFactory<Program> factory)
     {
-        private readonly WebApplicationFactory<Program> _factory;
-        public DefaultEndpointTests(WebApplicationFactory<Program> factory)
-        {
-            _factory = factory;
-        }
+        _factory = factory;
+    }
 
-        [Theory]
-        [InlineData("/")]
-        [InlineData("/Index")]
-        [InlineData("/About")]
-        [InlineData("/Privacy")]
-        [InlineData("/Contact")]
-        public async Task Get_EndpointsReturnSuccessAndCorrectContentType(string url)
-        {
-            // Arrange
-            var client = _factory.CreateClient();
+    [Theory]
+    [InlineData("/")]
+    [InlineData("/Index")]
+    [InlineData("/About")]
+    [InlineData("/Privacy")]
+    [InlineData("/Contact")]
+    public async Task Get_EndpointsReturnSuccessAndCorrectContentType(string url)
+    {
+        // Arrange
+        var client = _factory.CreateClient();
 
-            // Act
-            var response = await client.GetAsync(url);
+        // Act
+        var response = await client.GetAsync(url);
 
-            // Assert
-            response.EnsureSuccessStatusCode(); // Status Code 200-299
-            Assert.Equal("text/html; charset=utf-8",
-                response.Content.Headers.ContentType.ToString());
-        }
+        // Assert
+        response.EnsureSuccessStatusCode(); // Status Code 200-299
+        Assert.Equal("text/html; charset=utf-8",
+            response.Content.Headers.ContentType.ToString());
     }
 }
