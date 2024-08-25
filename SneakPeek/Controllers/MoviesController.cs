@@ -21,25 +21,29 @@ public class MoviesController : ControllerBase
     {
         string filePath = Path.Combine(_hostingEnvironment.ContentRootPath, "Movies.json");
 
-        try
-        {
-            using (FileStream openStream = System.IO.File.OpenRead(filePath))
+            try
             {
-                List<Movie> movies = await JsonSerializer.DeserializeAsync<List<Movie>>(openStream);
-                string jsonResult = JsonSerializer.Serialize(movies, new JsonSerializerOptions
+                using (FileStream openStream = System.IO.File.OpenRead(filePath))
                 {
-                    WriteIndented = true
-                });
-                return Content(jsonResult, "application/json; charset=utf-8");
+                    List<Movie> movies = await JsonSerializer.DeserializeAsync<List<Movie>>(openStream);
+                    string jsonResult = JsonSerializer.Serialize(movies, new JsonSerializerOptions
+                    {
+                        WriteIndented = true // Makes this string formatted correctly
+                    });
+                    return Content(jsonResult, "text/json; charset=utf-8"); // Return string in json format
+                } 
+
             }
-        }
-        catch (IOException ex)
-        {
-            return StatusCode(500, $"Internal server error: {ex.Message}");
-        }
-        catch (JsonException ex)
-        {
-            return BadRequest($"JSON parsing error: {ex.Message}");
+            catch (IOException ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+            catch (JsonException ex)
+            {
+                return BadRequest($"JSON parsing error: {ex.Message}");
+            }
+
+ 
         }
     }
 }
