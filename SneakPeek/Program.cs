@@ -1,4 +1,7 @@
+using Persistence;
 using SneakPeek.Components;
+using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,8 +10,14 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddControllers();
-
+builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Movies"));
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 var app = builder.Build();
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
