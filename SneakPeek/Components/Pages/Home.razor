@@ -34,6 +34,7 @@ else
     {
         try
         {
+            Http.BaseAddress = new Uri("http://localhost:5098");
             movies = await Http.GetFromJsonAsync<List<Movie>>("/movies");
         }
         catch (Exception ex)
