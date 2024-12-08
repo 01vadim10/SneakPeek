@@ -1,5 +1,5 @@
 ﻿@page "/"
-@inject HttpClient Http
+@inject IHttpClientFactory HttpClientFactory
 @using SneakPeek.Models
 
 <PageTitle>Home</PageTitle>
@@ -16,11 +16,11 @@ else
         @foreach (var movie in movies)
         {
          <li>
-             <p><strong>@movie.title</strong>(@movie.release_date) - @movie.genre</p>
-             <p>@movie.description</p>
-             <p><em>Directed by: @string.Join(",", movie.director)</em></p>
-             <p>Rating: @movie.rating</p>
-             <p>Do you need to wait? - @movie.wait</p>
+             <p><strong>@movie.Title</strong>(@movie.Release_date) - @movie.Genre</p>
+             <p>@movie.Description</p>
+             <p><em>Directed by: @string.Join(",", movie.Director)</em></p>
+             <p>Rating: @movie.Rating</p>
+             <p>Do you need to wait? - @movie.Wait</p>
          </li>   
         }
     </ul>
@@ -34,7 +34,8 @@ else
     {
         try
         {
-            movies = await Http.GetFromJsonAsync<List<Movie>>("/movies");
+            var client = HttpClientFactory.CreateClient("MyHttpClient");
+            movies = await client.GetFromJsonAsync<List<Movie>>("/movies");
         }
         catch (Exception ex)
         {

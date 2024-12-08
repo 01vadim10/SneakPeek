@@ -1,12 +1,27 @@
-﻿namespace SneakPeek.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace SneakPeek.Models;
 
 public class Movie
 {
-    public string title { get; set; }
-    public string wait { get; set; }
-    public string description { get; set; }
-    public string release_date { get; set; }
-    public string genre { get; set; }
-    public List<string> director { get; set; }
-    public double rating { get; set; }
+    [JsonPropertyName("title")]
+    public string Title { get; set; }
+
+    [JsonPropertyName("wait")]
+    public string Wait { get; set; }
+
+    [JsonPropertyName("description")]
+    public string Description { get; set; }
+
+    [JsonPropertyName("release_date")]
+    public string Release_date { get; set; }
+
+    [JsonPropertyName("genre")]
+    public string Genre { get; set; }
+
+    [JsonPropertyName("director")]
+    public List<string> Director { get; set; }
+
+    [JsonPropertyName("rating")]
+    public double Rating { get; set; }
 }
