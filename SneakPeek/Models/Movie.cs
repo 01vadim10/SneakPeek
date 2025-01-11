@@ -5,22 +5,22 @@ namespace SneakPeek.Models;
 public class Movie
 {
     [JsonPropertyName("title")]
-    public string Title { get; set; }
+    public string Title { get; set; } = string.Empty;
 
     [JsonPropertyName("wait")]
-    public string Wait { get; set; }
+    public string Wait { get; set; } = string.Empty;
 
     [JsonPropertyName("description")]
-    public string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
 
     [JsonPropertyName("release_date")]
-    public string Release_date { get; set; }
+    public string Release_date { get; set; } = string.Empty;
 
     [JsonPropertyName("genre")]
-    public string Genre { get; set; }
+    public string Genre { get; set; } = string.Empty;
 
     [JsonPropertyName("director")]
-    public List<string> Director { get; set; }
+    public List<string> Director { get; set; } = new List<string>();
 
     [JsonPropertyName("rating")]
     public double Rating { get; set; }
