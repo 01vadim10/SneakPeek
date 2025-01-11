@@ -19,8 +19,8 @@ public class Movie
     [JsonPropertyName("genre")]
     public string Genre { get; set; } = string.Empty;
 
-    [JsonPropertyName("director")]
-    public List<string> Director { get; set; } = new List<string>();
+    [JsonPropertyName("directors")]
+    public List<string> Directors { get; set; } = new List<string>();
 
     [JsonPropertyName("rating")]
     public double Rating { get; set; }
