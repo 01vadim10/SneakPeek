@@ -2,15 +2,9 @@ using SneakPeek.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-
-builder.Services.AddHttpClient("MyHttpClient", client =>
-{
-    client.BaseAddress = new Uri("http://localhost:5098"); 
-});
 
 builder.Services.AddControllers();
 

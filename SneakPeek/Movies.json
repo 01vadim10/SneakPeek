@@ -5,7 +5,7 @@
       "description": "A skilled thief, the absolute best in the dangerous art of extraction, steals valuable secrets from deep within the subconscious during the dream state.",
       "release_date": "2010-07-16",
       "genre": "Science Fiction",
-      "directors": [ "Christopher Nolan" ],
+      "director": [ "Christopher Nolan" ],
       "rating": 8.8
     },
     {
@@ -23,7 +23,7 @@
       "description": "A poor family schemes to become employed by a wealthy family and infiltrate their household by posing as unrelated, highly qualified individuals.",
       "release_date": "2019-05-30",
       "genre": "Thriller, Drama",
-      "directors": [ "Bong Joon-ho" ],
+      "director": [ "Bong Joon-ho" ],
       "rating": 8.6
     },
     {
@@ -32,7 +32,7 @@
       "description": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
       "release_date": "2014-11-07",
       "genre": "Science Fiction, Adventure",
-      "directors": [ "Christopher Nolan" ],
+      "director": [ "Christopher Nolan" ],
       "rating": 8.6
     },
     {
@@ -41,7 +41,7 @@
       "description": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
       "release_date": "1972-03-24",
       "genre": "Crime, Drama",
-      "directors": [ "Francis Ford Coppola" ],
+      "director": [ "Francis Ford Coppola" ],
       "rating": 9.2
     }
 ]
