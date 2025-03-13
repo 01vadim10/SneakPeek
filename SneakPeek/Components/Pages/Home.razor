@@ -1,7 +1,45 @@
 ﻿@page "/"
+@inject IHttpClientFactory HttpClientFactory
+@using SneakPeek.Models
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Movie List</h1>
 
-Welcome to your new app.
+@if (movies == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <ul>
+        @foreach (var movie in movies)
+        {
+         <li>
+             <p><strong>@movie.Title</strong>(@movie.Release_date) - @movie.Genre</p>
+             <p>@movie.Description</p>
+             <p><em>Directed by: @string.Join(",", movie.Directors)</em></p>
+             <p>Rating: @movie.Rating</p>
+             <p>Do you need to wait? - @movie.Wait</p>
+         </li>   
+        }
+    </ul>
+}
+
+
+@code {
+    private List<Movie>? movies;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var client = HttpClientFactory.CreateClient("MyHttpClient");
+            movies = await client.GetFromJsonAsync<List<Movie>>("/movies");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching movies: {ex.Message}");
+        }
+    }
+}
