@@ -3,17 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SneakPeek", "SneakPeek.csproj", "{5AC3F1D4-8CF0-44BC-9575-AE18C74E1641}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SneakPeek", "src\SneakPeek\SneakPeek.csproj", "{5AC3F1D4-8CF0-44BC-9575-AE18C74E1641}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SneakPeak.Tests", "..\SneakPeak.Tests\SneakPeak.Tests.csproj", "{B1190165-9A25-4F78-8786-823EA4F3D9E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SneakPeak.Tests", "tests\SneakPeak.Tests\SneakPeak.Tests.csproj", "{B1190165-9A25-4F78-8786-823EA4F3D9E0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SneakPeak.IntegrationTests", "..\SneakPeak.IntegrationTests\SneakPeak.IntegrationTests.csproj", "{1113E339-7AC8-4B41-BD84-96E82ACBD239}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SneakPeak.IntegrationTests", "tests\SneakPeak.IntegrationTests\SneakPeak.IntegrationTests.csproj", "{1113E339-7AC8-4B41-BD84-96E82ACBD239}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "..\Domain\Domain.csproj", "{C816372F-10EE-4598-A134-590E16421398}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\Domain\Domain.csproj", "{C816372F-10EE-4598-A134-590E16421398}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "..\Application\Application.csproj", "{A2A71AED-61FE-4DBB-813E-D0806E09A594}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "src\Application\Application.csproj", "{A2A71AED-61FE-4DBB-813E-D0806E09A594}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "..\Persistence\Persistence.csproj", "{28DBE595-FC1E-4843-BFDD-7F9D2D731E2E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "src\Persistence\Persistence.csproj", "{28DBE595-FC1E-4843-BFDD-7F9D2D731E2E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3D15D4BA-27BA-40C9-9E70-A62881C47869}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +52,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5AC3F1D4-8CF0-44BC-9575-AE18C74E1641} = {3D15D4BA-27BA-40C9-9E70-A62881C47869}
+		{B1190165-9A25-4F78-8786-823EA4F3D9E0} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{1113E339-7AC8-4B41-BD84-96E82ACBD239} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{C816372F-10EE-4598-A134-590E16421398} = {3D15D4BA-27BA-40C9-9E70-A62881C47869}
+		{A2A71AED-61FE-4DBB-813E-D0806E09A594} = {3D15D4BA-27BA-40C9-9E70-A62881C47869}
+		{28DBE595-FC1E-4843-BFDD-7F9D2D731E2E} = {3D15D4BA-27BA-40C9-9E70-A62881C47869}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A4D9CAF9-D704-46F2-A3D6-139D4C9979D3}
