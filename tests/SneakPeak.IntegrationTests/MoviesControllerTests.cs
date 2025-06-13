@@ -1,6 +1,8 @@
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using System.Net;
+using System.Text.Json;
+using SneakPeek.Models;
 
 namespace SneakPeak.Tests;
 
@@ -26,5 +28,11 @@ public class MoviesControllerTests : IClassFixture<WebApplicationFactory<Program
         //Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         response.Content.Headers.ContentType?.ToString().Should().Be("text/json; charset=utf-8");
+
+        var json = await response.Content.ReadAsStringAsync();
+        var movies = JsonSerializer.Deserialize<List<Movie>>(json);
+
+        movies.Should().NotBeNull();
+        movies?.Count.Should().BeGreaterThan(0);
     }
 }
