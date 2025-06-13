@@ -5,6 +5,8 @@ using SneakPeek.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add Aspire service defaults
+builder.AddServiceDefaults();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
@@ -19,6 +21,9 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Movies"));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 var app = builder.Build();
+
+// Enable Aspire service defaults
+app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

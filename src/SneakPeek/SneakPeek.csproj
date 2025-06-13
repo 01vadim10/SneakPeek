@@ -13,6 +13,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\Persistence\Persistence.csproj" />
+    <ProjectReference
+      Include="..\..\aspire\SneakPeek.Aspire\SneakPeek.Aspire.ServiceDefaults\SneakPeek.Aspire.ServiceDefaults.csproj" />
   </ItemGroup>
 
   <ItemGroup>
