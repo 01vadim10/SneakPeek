@@ -20,11 +20,6 @@ builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Movie
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 var app = builder.Build();
 
-if (builder.Environment.IsDevelopment())
-{
-    builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-}
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
