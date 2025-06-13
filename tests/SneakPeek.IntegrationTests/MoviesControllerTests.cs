@@ -2,7 +2,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using System.Net;
 
-namespace SneakPeak.Tests;
+namespace SneakPeek.Tests;
 
 public class MoviesControllerTests : IClassFixture<WebApplicationFactory<Program>>
 {
