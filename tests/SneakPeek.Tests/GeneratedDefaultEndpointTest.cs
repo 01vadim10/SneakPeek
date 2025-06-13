@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 
-namespace SneakPeak.Tests;
+namespace SneakPeek.Tests;
 
 public class GeneratedDefaultEndpointTest : IClassFixture<WebApplicationFactory<Program>>
 {

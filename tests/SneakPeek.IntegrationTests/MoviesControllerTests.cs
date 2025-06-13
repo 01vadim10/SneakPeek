@@ -1,10 +1,10 @@
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
+using SneakPeek.Models;
 using System.Net;
 using System.Text.Json;
-using SneakPeek.Models;
 
-namespace SneakPeak.Tests;
+namespace SneakPeak.IntegrationTests;
 
 public class MoviesControllerTests : IClassFixture<WebApplicationFactory<Program>>
 {
