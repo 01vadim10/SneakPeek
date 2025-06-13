@@ -7,42 +7,35 @@ namespace SneakPeek.Controllers;
 [ApiController]
 [Route("[controller]")]
 
-public class MoviesController : ControllerBase
+public class MoviesController(IWebHostEnvironment hostingEnvironment) : ControllerBase
 {
-    private readonly IWebHostEnvironment _hostingEnvironment;
-
-    public MoviesController(IWebHostEnvironment hostingEnvironment)
-    {
-        _hostingEnvironment = hostingEnvironment;
-    }
+    private readonly IWebHostEnvironment _hostingEnvironment = hostingEnvironment;
 
     [HttpGet(Name = "movies")]
     public async Task<IActionResult> Get()
     {
         string filePath = Path.Combine(_hostingEnvironment.ContentRootPath, "Movies.json");
 
-            try
+        try
+        {
+            using (FileStream openStream = System.IO.File.OpenRead(filePath))
             {
-                using (FileStream openStream = System.IO.File.OpenRead(filePath))
+                var movies = await JsonSerializer.DeserializeAsync<List<Movie>>(openStream);
+                string jsonResult = JsonSerializer.Serialize(movies, new JsonSerializerOptions
                 {
-                    List<Movie> movies = await JsonSerializer.DeserializeAsync<List<Movie>>(openStream);
-                    string jsonResult = JsonSerializer.Serialize(movies, new JsonSerializerOptions
-                    {
-                        WriteIndented = true // Makes this string formatted correctly
-                    });
-                    return Content(jsonResult, "text/json; charset=utf-8"); // Return string in json format
-                } 
-
-            }
-            catch (IOException ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
-            catch (JsonException ex)
-            {
-                return BadRequest($"JSON parsing error: {ex.Message}");
+                    WriteIndented = true // Makes this string formatted correctly
+                });
+                return Content(jsonResult, "text/json; charset=utf-8"); // Return string in json format
             }
 
- 
+        }
+        catch (IOException ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+        catch (JsonException ex)
+        {
+            return BadRequest($"JSON parsing error: {ex.Message}");
         }
     }
+}

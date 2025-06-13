@@ -1,6 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 using SneakPeek.Components;
-using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +12,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddHttpClient("MyHttpClient", client =>
 {
-    client.BaseAddress = new Uri("http://localhost:5098"); 
+    client.BaseAddress = new Uri("http://localhost:5098");
 });
 
 builder.Services.AddControllers();
@@ -42,12 +42,6 @@ app.UseAntiforgery();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
+app.MapControllers();
 
 app.Run();
-
-public partial class Program { }

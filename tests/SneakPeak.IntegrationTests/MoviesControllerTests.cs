@@ -18,14 +18,14 @@ public class MoviesControllerTests : IClassFixture<WebApplicationFactory<Program
     [Fact]
     public async Task Get_MoviesEndpointsReturnSuccessAndCorrectContentType()
     {
-        //Arrange
+        // Arrange
         const string url = "/movies";
         var client = _factory.CreateClient();
 
-        //Act
+        // Act
         var response = await client.GetAsync(url);
 
-        //Assert
+        // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         response.Content.Headers.ContentType?.ToString().Should().Be("text/json; charset=utf-8");
 

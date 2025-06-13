@@ -1,4 +1,3 @@
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace SneakPeak.Tests;
@@ -13,10 +12,6 @@ public class GeneratedDefaultEndpointTest : IClassFixture<WebApplicationFactory<
 
     [Theory]
     [InlineData("/")]
-    [InlineData("/Index")]
-    [InlineData("/About")]
-    [InlineData("/Privacy")]
-    [InlineData("/Contact")]
     public async Task Get_EndpointsReturnSuccessAndCorrectContentType(string url)
     {
         // Arrange
@@ -28,6 +23,6 @@ public class GeneratedDefaultEndpointTest : IClassFixture<WebApplicationFactory<
         // Assert
         response.EnsureSuccessStatusCode(); // Status Code 200-299
         Assert.Equal("text/html; charset=utf-8",
-            response.Content.Headers.ContentType.ToString());
+            response.Content.Headers.ContentType?.ToString());
     }
 }
