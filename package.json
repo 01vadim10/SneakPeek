@@ -1,0 +1,28 @@
+{
+  "name": "sneakpeek",
+  "version": "1.0.0",
+  "description": "After movie scene web site. Here you will be able to see if you need to stay in the cinema to watch after movie scene which goes after extras",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+  //"start": "npx playwright test",
+  //"test": "npx playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/01vadim10/SneakPeek.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/01vadim10/SneakPeek/issues"
+  },
+  "homepage": "https://github.com/01vadim10/SneakPeek#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.53.0",
+    "@types/node": "^24.0.1"
+  }
+}
