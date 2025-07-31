@@ -4,6 +4,7 @@ namespace SneakPeek.Models;
 
 public class Movie
 {
+    public readonly int? Id;
     [JsonPropertyName("title")]
     public string Title { get; set; } = string.Empty;
 

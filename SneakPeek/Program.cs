@@ -1,6 +1,9 @@
 using Persistence;
 using SneakPeek.Components;
+using Domain;
 using Microsoft.EntityFrameworkCore;
+using Domain.Interfaces;
+using Persistence.Repositories;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +21,12 @@ builder.Services.AddHttpClient("MyHttpClient", client =>
 builder.Services.AddControllers();
 builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Movies"));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+builder.Services.AddScoped<IMoviesRepository, MoviesRepository>();
+
 var app = builder.Build();
+
+
 
 if (builder.Environment.IsDevelopment())
 {
