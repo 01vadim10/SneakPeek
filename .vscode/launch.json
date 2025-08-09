@@ -9,7 +9,7 @@
             "name": "C#: SneakPeek Debug",
             "type": "dotnet",
             "request": "launch",
-            "projectPath": "${workspaceFolder}/src/SneakPeek/SneakPeek.csproj"
+            "projectPath": "${workspaceFolder}/aspire/SneakPeek.Aspire/SneakPeek.Aspire.AppHost/SneakPeek.Aspire.AppHost.csproj"
         },
         {
             "name": ".NET Core Attach",
