@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using SneakPeek.Components;
+using Domain.Interfaces;
+using Persistence.Repositories;
 
 
 var builder = WebApplication.CreateBuilder(args);
