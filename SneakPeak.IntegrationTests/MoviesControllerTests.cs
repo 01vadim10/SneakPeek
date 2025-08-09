@@ -26,6 +26,6 @@ public class MoviesControllerTests : IClassFixture<WebApplicationFactory<Program
 
         //Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        response.Content.Headers.ContentType.ToString().Should().Be("application/json; charset=utf-8");
+        response.Content.Headers.ContentType?.ToString().Should().Be("application/json; charset=utf-8");
     }
 }

@@ -25,7 +25,8 @@ public class MoviesController : ControllerBase
             {
                 using (FileStream openStream = System.IO.File.OpenRead(filePath))
                 {
-                    List<Movie> movies = await JsonSerializer.DeserializeAsync<List<Movie>>(openStream);
+                    List<Movie>? movies = await JsonSerializer.DeserializeAsync<List<Movie>>(openStream);
+                    if (movies == null) return NotFound("No movies found in the JSON file.");
                     string jsonResult = JsonSerializer.Serialize(movies, new JsonSerializerOptions
                     {
                         WriteIndented = true // Makes this string formatted correctly
