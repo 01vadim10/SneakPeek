@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Persistence.Repositories;
 using Persistence;
 using SneakPeek.Models;
@@ -8,11 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace SneakPeak.Tests.Repositories
+namespace SneakPeek.Tests.Repositories
 {
     public class MoviesRepositoryTests
     {
@@ -21,8 +18,6 @@ namespace SneakPeak.Tests.Repositories
             var options = new DbContextOptionsBuilder<DataContext>()
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;
-
-            var context = new DataContext(options);
 
             return new DataContext(options);
         }
