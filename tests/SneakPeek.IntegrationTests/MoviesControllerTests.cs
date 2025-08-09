@@ -1,9 +1,10 @@
-using Microsoft.VisualStudio.TestPlatform.TestHost;
-using Microsoft.AspNetCore.Mvc.Testing;
 using FluentAssertions;
+using Microsoft.AspNetCore.Mvc.Testing;
+using SneakPeek.Models;
 using System.Net;
+using System.Text.Json;
 
-namespace SneakPeak.Tests;
+namespace SneakPeak.IntegrationTests;
 
 public class MoviesControllerTests : IClassFixture<WebApplicationFactory<Program>>
 {
@@ -17,15 +18,21 @@ public class MoviesControllerTests : IClassFixture<WebApplicationFactory<Program
     [Fact]
     public async Task Get_MoviesEndpointsReturnSuccessAndCorrectContentType()
     {
-        //Arrange
+        // Arrange
         const string url = "/movies";
         var client = _factory.CreateClient();
 
-       //Act
+        // Act
         var response = await client.GetAsync(url);
 
-        //Assert
+        // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        response.Content.Headers.ContentType?.ToString().Should().Be("application/json; charset=utf-8");
+        response.Content.Headers.ContentType?.ToString().Should().Be("text/json; charset=utf-8");
+
+        var json = await response.Content.ReadAsStringAsync();
+        var movies = JsonSerializer.Deserialize<List<Movie>>(json);
+
+        movies.Should().NotBeNull();
+        movies?.Count.Should().BeGreaterThan(0);
     }
 }

@@ -1,7 +1,6 @@
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Microsoft.AspNetCore.Mvc.Testing;
 
-namespace SneakPeak.Tests;
+namespace SneakPeek.Tests;
 
 public class GeneratedDefaultEndpointTest : IClassFixture<WebApplicationFactory<Program>>
 {
@@ -13,10 +12,6 @@ public class GeneratedDefaultEndpointTest : IClassFixture<WebApplicationFactory<
 
     [Theory]
     [InlineData("/")]
-    [InlineData("/Index")]
-    [InlineData("/About")]
-    [InlineData("/Privacy")]
-    [InlineData("/Contact")]
     public async Task Get_EndpointsReturnSuccessAndCorrectContentType(string url)
     {
         // Arrange

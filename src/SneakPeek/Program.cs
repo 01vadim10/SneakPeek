@@ -1,13 +1,12 @@
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 using SneakPeek.Components;
-using Domain;
-using Microsoft.EntityFrameworkCore;
-using Domain.Interfaces;
-using Persistence.Repositories;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add Aspire service defaults
+builder.AddServiceDefaults();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
@@ -15,7 +14,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddHttpClient("MyHttpClient", client =>
 {
-    client.BaseAddress = new Uri("http://localhost:5098"); 
+    client.BaseAddress = new Uri("http://localhost:5098");
 });
 
 builder.Services.AddControllers();
@@ -26,12 +25,12 @@ builder.Services.AddScoped<IMoviesRepository, MoviesRepository>();
 
 var app = builder.Build();
 
-
-
 if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 }
+// Enable Aspire service defaults
+app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -54,5 +53,3 @@ app.MapRazorComponents<App>()
 app.MapControllers();
 
 app.Run();
-
-public partial class Program { }
