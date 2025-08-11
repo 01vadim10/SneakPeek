@@ -1,7 +1,8 @@
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Microsoft.AspNetCore.Mvc.Testing;
 using FluentAssertions;
 using System.Net;
+using SneakPeek.Models;
+using System.Text.Json;
 
 namespace SneakPeak.Tests;
 
@@ -21,11 +22,17 @@ public class MoviesControllerTests : IClassFixture<WebApplicationFactory<Program
         const string url = "/movies";
         var client = _factory.CreateClient();
 
-       //Act
+        //Act
         var response = await client.GetAsync(url);
 
         //Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        response.Content.Headers.ContentType.ToString().Should().Be("application/json; charset=utf-8");
+        response.Content.Headers.ContentType.ToString().Should().Be("text/json; charset=utf-8");
+
+        var json = await response.Content.ReadAsStringAsync();
+        var movies = JsonSerializer.Deserialize<List<Movie>>(json);
+
+        movies.Should().NotBeNull();
+        movies?.Count.Should().BeGreaterThan(0);
     }
 }
