@@ -13,8 +13,6 @@ public class MoviesRepositoryTests
         .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
         .Options;
 
-        var context = new DataContext(options);
-
         return new DataContext(options);
     }
 
@@ -90,6 +88,20 @@ public class MoviesRepositoryTests
     }
 
     [Fact]
+    public async Task AddMovieAsync_DoesNothing_WhenMovieDoesNotExist()
+    {
+        // Arrange
+        var context = GetInMemoryDbContext();
+        await context.SaveChangesAsync();
+
+        var repo = new MoviesRepository(context);
+
+        // Assert
+        await Assert.ThrowsAsync<ArgumentNullException>(
+        () => repo.AddMovieAsync(null)
+        );
+    }
+    [Fact]
     public async Task UpdateMovieAsync_UpdatesMovieProperties()
     {
         // Arrange
@@ -107,5 +119,74 @@ public class MoviesRepositoryTests
         Assert.NotNull(updatedMovie);
         Assert.Equal("Test", updatedMovie.Title);
     }
+
+    [Fact]
+    public async Task UpdateMovieAsync_DoesNothing_WhenMovieDoesNotExist()
+    {
+        // Arrange
+        var context = GetInMemoryDbContext();
+        context.Movies.Add(new Movie { Id = 1, Title = "Test Movie" });
+        await context.SaveChangesAsync();
+
+        var repo = new MoviesRepository(context);
+
+
+        // Assert
+        await Assert.ThrowsAsync<ArgumentException>(
+        () => repo.UpdateMovieAsync(new Movie { })
+        );
+    }
+
+    [Fact]
+    public async Task DeleteMovieAsync_RemovesMovieFromDatabase()
+    {
+        // Arrange
+        var context = GetInMemoryDbContext();
+        context.Movies.AddRange(new Movie {  Id = 1, Title = "Movie 1" }, new Movie { Id = 2, Title = "Movie 2" });
+        await context.SaveChangesAsync();
+
+        var repo = new MoviesRepository(context);
+
+        // Act
+        await repo.DeleteMovieAsync(1);
+
+        // Assert
+        Assert.DoesNotContain(context.Movies, m => m.Id == 1);
+    }
+
+    [Fact]
+    public async Task DeleteMovieAsync_DoesNothing_WhenMovieDoesNotExist()
+    {
+        // Arrange
+        var context = GetInMemoryDbContext();
+        context.Movies.AddRange(new Movie { Id = 1, Title = "Movie 1" }, new Movie { Id = 2, Title = "Movie 2" });
+        await context.SaveChangesAsync();
+
+        var repo = new MoviesRepository(context);
+
+        // Act
+        await repo.DeleteMovieAsync(99);
+
+        // Assert
+        Assert.Contains(context.Movies, m => m.Id == 1);
+        Assert.Contains(context.Movies, m => m.Id == 2);
+    }
+
+    [Fact]
+    public async Task GetAllMoviesAsync_ReturnsEmptyList_WhenNoMoviesPresent()
+    {
+        // Arrange
+        var context = GetInMemoryDbContext();
+        await context.SaveChangesAsync();
+
+        var repo = new MoviesRepository(context);
+
+        // Act
+        var result = await repo.GetAllMoviesAsync();
+
+        //Assert
+        Assert.Empty(result);
+    }
+
 }
 

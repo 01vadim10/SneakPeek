@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc.Testing;
 using SneakPeek.Models;
 using System.Net;
-using SneakPeek.Models;
 using System.Text.Json;
 
 namespace SneakPeak.IntegrationTests;
