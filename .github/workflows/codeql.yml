@@ -27,7 +27,7 @@ jobs:
     #   - https://gh.io/supported-runners-and-hardware-resources
     #   - https://gh.io/using-larger-runners (GitHub.com only)
     # Consider using larger runners or machines with greater resources for possible analysis time improvements.
-    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest-4-cores' }}
+    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
     permissions:
       # required for all workflows
       security-events: write
@@ -59,11 +59,13 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
     - name: Setup .NET
+      if: matrix.language == 'csharp'
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '9.0.x'  # Match your project version
         
     - name: Cache .NET packages
+      if: matrix.language == 'csharp'
       uses: actions/cache@v4
       with:
         path: ~/.nuget/packages
