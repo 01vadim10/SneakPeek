@@ -4,7 +4,6 @@ using SneakPeek.Components;
 using Domain.Interfaces;
 using Persistence.Repositories;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add Aspire service defaults
@@ -21,7 +20,6 @@ builder.Services.AddHttpClient("MyHttpClient", client =>
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Movies"));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddScoped<IMoviesRepository, MoviesRepository>();
 
@@ -50,7 +48,6 @@ app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
-
 
 app.MapControllers();
 
