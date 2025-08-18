@@ -88,7 +88,7 @@ public class MoviesRepositoryTests
     }
 
     [Fact]
-    public async Task AddMovieAsync_DoesNothing_WhenMovieDoesNotExist()
+    public async Task AddMovieAsync_ThrowsException_WhenMovieIsNull()
     {
         // Arrange
         var context = GetInMemoryDbContext();
