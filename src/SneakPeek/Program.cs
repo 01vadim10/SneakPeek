@@ -23,12 +23,13 @@ builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Movie
 
 builder.Services.AddScoped<IMoviesRepository, MoviesRepository>();
 
-var app = builder.Build();
-
 if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 }
+
+var app = builder.Build();
+
 // Enable Aspire service defaults
 app.MapDefaultEndpoints();
 
