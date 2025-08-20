@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc.Testing;
+using SneakPeek.Models;
 
 namespace SneakPeek.Tests;
 

@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using SneakPeek.Components;
-
+using Domain.Interfaces;
+using Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +20,14 @@ builder.Services.AddHttpClient("MyHttpClient", client =>
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Movies"));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+builder.Services.AddScoped<IMoviesRepository, MoviesRepository>();
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+}
+
 var app = builder.Build();
 
 // Enable Aspire service defaults
