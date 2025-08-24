@@ -77,7 +77,7 @@ public class Movie
    ```
 3. Run the Aspire orchestrator:
    ```pwsh
-   dotnet run --project aspire/SneakPeek.Aspire/SneakPeek.Aspire.AppHost/SneakPeek.Aspire.AppHost.csproj
+   dotnet run --project aspire/SneakPeek.Aspire.AppHost/SneakPeek.Aspire.AppHost.csproj
    ```
 
 ### Running Tests

@@ -15,7 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\SneakPeek\SneakPeek.csproj" />
+    <ProjectReference Include="..\..\src\SneakPeek\SneakPeek.csproj" />
+    <ProjectReference Include="..\SneakPeek.Aspire.ServiceDefaults\SneakPeek.Aspire.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>
