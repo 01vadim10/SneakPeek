@@ -19,7 +19,7 @@ builder.Services.AddHttpClient("MyHttpClient", client =>
 });
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Movies"));
+builder.Services.AddDbContext<DataContext>(opt => opt.UseSqlite("Data Source=SneakPeek.db"));
 
 builder.Services.AddScoped<IMoviesRepository, MoviesRepository>();
 
