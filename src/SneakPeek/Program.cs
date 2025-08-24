@@ -19,7 +19,7 @@ builder.Services.AddHttpClient("MyHttpClient", client =>
 });
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<DataContext>(opt => opt.UseSqlite("Data Source=SneakPeek.db"));
+builder.Services.AddDbContext<DataContext>(opt => opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IMoviesRepository, MoviesRepository>();
 
@@ -29,6 +29,24 @@ if (builder.Environment.IsDevelopment())
 }
 
 var app = builder.Build();
+
+// Apply database migrations
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<DataContext>();
+    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+    
+    try
+    {
+        context.Database.Migrate();
+        logger.LogInformation("Database migrations applied successfully");
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "An error occurred while applying database migrations");
+        throw;
+    }
+}
 
 // Enable Aspire service defaults
 app.MapDefaultEndpoints();

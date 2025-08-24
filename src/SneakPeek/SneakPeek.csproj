@@ -13,13 +13,16 @@
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\Persistence\Persistence.csproj" />
-    <ProjectReference
-      Include="..\..\aspire\SneakPeek.Aspire\SneakPeek.Aspire.ServiceDefaults\SneakPeek.Aspire.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\aspire\SneakPeek.Aspire\SneakPeek.Aspire.ServiceDefaults\SneakPeek.Aspire.ServiceDefaults.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting" Version="9.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="9.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.8" />
   </ItemGroup>
 
