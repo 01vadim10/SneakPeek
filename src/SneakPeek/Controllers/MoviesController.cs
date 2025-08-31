@@ -1,41 +1,35 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SneakPeek.Models;
-using System.Text.Json;
+﻿using Domain.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SneakPeek.Controllers;
 
 [ApiController]
 [Route("[controller]")]
 
-public class MoviesController(IWebHostEnvironment hostingEnvironment) : ControllerBase
+public class MoviesController : ControllerBase
 {
-    private readonly IWebHostEnvironment _hostingEnvironment = hostingEnvironment;
+    private readonly IMoviesRepository _moviesRepository;
+
+    public MoviesController(IMoviesRepository moviesRepository)
+    {
+        _moviesRepository = moviesRepository;
+    }
 
     [HttpGet(Name = "movies")]
     public async Task<IActionResult> Get()
     {
-        string filePath = Path.Combine(_hostingEnvironment.ContentRootPath, "Movies.json");
-
         try
         {
-            using (FileStream openStream = System.IO.File.OpenRead(filePath))
-            {
-                var movies = await JsonSerializer.DeserializeAsync<List<Movie>>(openStream);
-                string jsonResult = JsonSerializer.Serialize(movies, new JsonSerializerOptions
-                {
-                    WriteIndented = true // Makes this string formatted correctly
-                });
-                return Content(jsonResult, "text/json; charset=utf-8"); // Return string in json format
-            }
+            var movies = await _moviesRepository.GetAllMoviesAsync();
+            if (movies == null || !movies.Any())
+                return NotFound("No movies found.");
 
+            return Ok(movies);
         }
-        catch (IOException ex)
+        catch (Exception)
         {
-            return StatusCode(500, $"Internal server error: {ex.Message}");
-        }
-        catch (JsonException ex)
-        {
-            return BadRequest($"JSON parsing error: {ex.Message}");
+            return StatusCode(500, $"Internal server error");
         }
     }
+
 }
