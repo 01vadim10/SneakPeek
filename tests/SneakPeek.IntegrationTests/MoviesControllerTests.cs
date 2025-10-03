@@ -17,44 +17,61 @@ public class MovieControllerTest : IClassFixture<WebApplicationFactory<Program>>
     }
 
     [Fact]
-    public async Task Get_WhenMoviesExist_ReturnsSuccessAndListOfMovies()
-    { 
-        var testMovies = new List<Movie>
-        { 
-            new Movie { Id = 1, Title = "Title 1"},
-            new Movie { Id = 2, Title = "Title 2"}
-        };
-
-        var repoMock = new Mock<IMoviesRepository>();
-        repoMock.Setup(r => r.GetAllMoviesAsync()).ReturnsAsync(testMovies);
-
-        var client = _factory.WithWebHostBuilder(
-            builder =>
-            {
-                builder.ConfigureServices(
-                    services =>
-                    {
-                        var descriptor = services.SingleOrDefault(s => s.ServiceType == typeof(IMoviesRepository));
-                        if (descriptor != null)
-                        {
-                            services.Remove(descriptor);
-                        }
-                        services.AddScoped<IMoviesRepository>(_=>repoMock.Object);
-                    });
-            }).CreateClient();
-
+    public async Task Get_MoviesEndpointsReturnSuccessAndCorrectContentType()
+    {
+        // Arrange
         const string url = "/movies";
+        var client = _factory.CreateClient();
+
+        //Act
         var response = await client.GetAsync(url);
 
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        response.Content.Headers.ContentType?.ToString().Should().Be("application/json; charset=utf-8");
+
+        var json = await response.Content.ReadAsStringAsync();
+        var movies = JsonSerializer.Deserialize<List<Movie>>(json);
+
+        movies.Should().NotBeNull();
+        movies?.Count.Should().Be(5); // Should have exactly 5 seeded movies
+    }
+
+    [Fact]
+    public async Task Get_MoviesEndpoint_ReturnsSeededMoviesWithCorrectData()
+    {
+        // Arrange
+        const string url = "/movies";
+        var client = _factory.CreateClient();
+
+        // Act
+        var response = await client.GetAsync(url);
+
+        // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
 
         var json = await response.Content.ReadAsStringAsync();
+        var movies = JsonSerializer.Deserialize<List<Movie>>(json, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        });
 
-        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true};
-        var moviesFromApi = JsonSerializer.Deserialize<List<Movie>>(json, options);
+        // Assert that movies is not null before further checks
+        movies.Should().NotBeNull();
+        movies!.Should().HaveCount(5);
 
-        moviesFromApi.Should().NotBeNull();
-        moviesFromApi.Should().HaveCount(2);
-        moviesFromApi.Should().BeEquivalentTo(testMovies);
+        // Verify specific seeded movies
+        movies!.Should().Contain(m => m.Title == "Inception" && m.Wait == "no wait" && m.Rating == 8.8);
+        movies!.Should().Contain(m => m.Title == "The Matrix" && m.Wait == "no wait" && m.Rating == 8.7);
+        movies!.Should().Contain(m => m.Title == "Parasite" && m.Wait == "wait" && m.Rating == 8.6);
+        movies!.Should().Contain(m => m.Title == "Interstellar" && m.Wait == "no wait" && m.Rating == 8.6);
+        movies!.Should().Contain(m => m.Title == "The Godfather" && m.Wait == "wait" && m.Rating == 9.2);
+
+        // Verify a movie with multiple directors
+        var matrix = movies!.FirstOrDefault(m => m.Title == "The Matrix");
+        matrix.Should().NotBeNull();
+        matrix?.Directors.Should().HaveCount(2);
+        matrix?.Directors.Should().Contain("Lana Wachowski");
+        matrix?.Directors.Should().Contain("Lilly Wachowski");
     }
 }
