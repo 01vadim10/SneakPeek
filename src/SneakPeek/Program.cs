@@ -30,20 +30,23 @@ if (builder.Environment.IsDevelopment())
 
 var app = builder.Build();
 
-// Apply database migrations
+// Apply database migrations and seed data
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<DataContext>();
     var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-    
+
     try
     {
         context.Database.Migrate();
         logger.LogInformation("Database migrations applied successfully");
+
+        DataContext.Seed(context);
+        logger.LogInformation("Database seeding completed successfully");
     }
     catch (Exception ex)
     {
-        logger.LogError(ex, "An error occurred while applying database migrations");
+        logger.LogError(ex, "An error occurred while applying database migrations or seeding");
         throw;
     }
 }
