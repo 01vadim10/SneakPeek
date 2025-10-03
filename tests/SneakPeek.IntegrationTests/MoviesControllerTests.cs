@@ -55,18 +55,19 @@ public class MoviesControllerTests : IClassFixture<WebApplicationFactory<Program
             PropertyNameCaseInsensitive = true
         });
 
+        // Assert that movies is not null before further checks
         movies.Should().NotBeNull();
-        movies.Should().HaveCount(5);
+        movies!.Should().HaveCount(5);
 
         // Verify specific seeded movies
-        movies.Should().Contain(m => m.Title == "Inception" && m.Wait == "no wait" && m.Rating == 8.8);
-        movies.Should().Contain(m => m.Title == "The Matrix" && m.Wait == "no wait" && m.Rating == 8.7);
-        movies.Should().Contain(m => m.Title == "Parasite" && m.Wait == "wait" && m.Rating == 8.6);
-        movies.Should().Contain(m => m.Title == "Interstellar" && m.Wait == "no wait" && m.Rating == 8.6);
-        movies.Should().Contain(m => m.Title == "The Godfather" && m.Wait == "wait" && m.Rating == 9.2);
+        movies!.Should().Contain(m => m.Title == "Inception" && m.Wait == "no wait" && m.Rating == 8.8);
+        movies!.Should().Contain(m => m.Title == "The Matrix" && m.Wait == "no wait" && m.Rating == 8.7);
+        movies!.Should().Contain(m => m.Title == "Parasite" && m.Wait == "wait" && m.Rating == 8.6);
+        movies!.Should().Contain(m => m.Title == "Interstellar" && m.Wait == "no wait" && m.Rating == 8.6);
+        movies!.Should().Contain(m => m.Title == "The Godfather" && m.Wait == "wait" && m.Rating == 9.2);
 
         // Verify a movie with multiple directors
-        var matrix = movies?.FirstOrDefault(m => m.Title == "The Matrix");
+        var matrix = movies!.FirstOrDefault(m => m.Title == "The Matrix");
         matrix.Should().NotBeNull();
         matrix?.Directors.Should().HaveCount(2);
         matrix?.Directors.Should().Contain("Lana Wachowski");
