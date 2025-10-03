@@ -22,8 +22,7 @@ public class DataContext : DbContext
         // Seed with movie data
         var movies = new List<Movie>
         {
-            new Movie
-            {
+            new() {
                 Title = "Inception",
                 Wait = "no wait",
                 Description = "A skilled thief, the absolute best in the dangerous art of extraction, steals valuable secrets from deep within the subconscious during the dream state.",
@@ -32,8 +31,7 @@ public class DataContext : DbContext
                 Directors = new List<string> { "Christopher Nolan" },
                 Rating = 8.8
             },
-            new Movie
-            {
+            new() {
                 Title = "The Matrix",
                 Wait = "no wait",
                 Description = "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
@@ -42,8 +40,7 @@ public class DataContext : DbContext
                 Directors = new List<string> { "Lana Wachowski", "Lilly Wachowski" },
                 Rating = 8.7
             },
-            new Movie
-            {
+            new() {
                 Title = "Parasite",
                 Wait = "wait",
                 Description = "A poor family schemes to become employed by a wealthy family and infiltrate their household by posing as unrelated, highly qualified individuals.",
@@ -52,8 +49,7 @@ public class DataContext : DbContext
                 Directors = new List<string> { "Bong Joon-ho" },
                 Rating = 8.6
             },
-            new Movie
-            {
+            new() {
                 Title = "Interstellar",
                 Wait = "no wait",
                 Description = "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
@@ -62,8 +58,7 @@ public class DataContext : DbContext
                 Directors = new List<string> { "Christopher Nolan" },
                 Rating = 8.6
             },
-            new Movie
-            {
+            new() {
                 Title = "The Godfather",
                 Wait = "wait",
                 Description = "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
