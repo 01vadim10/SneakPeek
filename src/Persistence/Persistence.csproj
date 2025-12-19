@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.11" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
