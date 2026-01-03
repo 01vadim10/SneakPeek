@@ -11,18 +11,11 @@ public class MoviesController(IMoviesRepository moviesRepository) : ControllerBa
     [HttpGet(Name = "movies")]
     public async Task<IActionResult> Get()
     {
-        try
-        {
-            var movies = await moviesRepository.GetAllMoviesAsync();
-            if (movies == null || movies.Count == 0)
-                return NotFound("No movies found.");
+        var movies = await moviesRepository.GetAllMoviesAsync();
+        if (movies == null || movies.Count == 0)
+            return NotFound("No movies found.");
 
-            return Ok(movies);
-        }
-        catch (Exception)
-        {
-            return StatusCode(500, $"Internal server error");
-        }
+        return Ok(movies);
     }
 
 }
