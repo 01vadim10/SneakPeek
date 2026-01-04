@@ -38,7 +38,8 @@ public class MoviesControllerTests
     {
         // Arrange
         var mockRepo = Substitute.For<IMoviesRepository>();
-        mockRepo.GetAllMoviesAsync().Returns((List<Movie>?)null);
+        List<Movie>? nullMovies = null;
+        mockRepo.GetAllMoviesAsync().Returns(nullMovies);
         var controller = new MoviesController(mockRepo);
 
         // Act
