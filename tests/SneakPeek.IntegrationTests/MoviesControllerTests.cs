@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc.Testing;
-using Moq;
 using SneakPeek.Models;
 using FluentAssertions;
 using Domain.Interfaces;
@@ -7,11 +6,11 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 using System.Text.Json;
 
-public class MovieControllerTest : IClassFixture<WebApplicationFactory<Program>>
+public class MoviesControllerTests : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly WebApplicationFactory<Program> _factory;
 
-    public MovieControllerTest(WebApplicationFactory<Program> factory)
+    public MoviesControllerTests(WebApplicationFactory<Program> factory)
     { 
         _factory = factory;
     }
