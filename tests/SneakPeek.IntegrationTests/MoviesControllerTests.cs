@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Mvc.Testing;
-using FluentAssertions;
 using SneakPeek.Models;
+using FluentAssertions;
+using Domain.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 using System.Text.Json;
-
-namespace SneakPeak.IntegrationTests;
 
 public class MoviesControllerTests : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly WebApplicationFactory<Program> _factory;
 
     public MoviesControllerTests(WebApplicationFactory<Program> factory)
-    {
+    { 
         _factory = factory;
     }
 

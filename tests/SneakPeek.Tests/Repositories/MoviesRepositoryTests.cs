@@ -68,7 +68,7 @@ public class MoviesRepositoryTests
         var result = await repo.GetMovieByIdAsync(99);
 
         // Assert
-        Assert.Equal(null, result);
+        Assert.Null(result);
     }
 
     [Fact]
@@ -98,7 +98,7 @@ public class MoviesRepositoryTests
 
         // Assert
         await Assert.ThrowsAsync<ArgumentNullException>(
-        () => repo.AddMovieAsync(null)
+        () => repo.AddMovieAsync(null!)
         );
     }
     [Fact]

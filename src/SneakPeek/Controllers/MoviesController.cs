@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Domain.Interfaces;
+﻿using Domain.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SneakPeek.Controllers;
 
@@ -7,19 +7,15 @@ namespace SneakPeek.Controllers;
 [Route("[controller]")]
 public class MoviesController(IMoviesRepository moviesRepository) : ControllerBase
 {
-    private readonly IMoviesRepository _moviesRepository = moviesRepository;
 
     [HttpGet(Name = "movies")]
     public async Task<IActionResult> Get()
     {
-        try
-        {
-            var movies = await _moviesRepository.GetAllMoviesAsync();
-            return Ok(movies);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, $"Internal server error: {ex.Message}");
-        }
+        var movies = await moviesRepository.GetAllMoviesAsync();
+        if (movies == null || movies.Count == 0)
+            return NotFound("No movies found.");
+
+        return Ok(movies);
     }
+
 }
