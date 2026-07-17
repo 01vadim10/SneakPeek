@@ -1,4 +1,5 @@
 ﻿@page "/"
+@rendermode InteractiveServer
 @inject IHttpClientFactory HttpClientFactory
 @using SneakPeek.Models
 
@@ -6,9 +7,19 @@
 
 <h1>Movie List</h1>
 
+<div class="search-box">
+    <input type="text" @bind="_searchQuery" placeholder="Movie search..." />
+    <button @onclick="Search">Search</button>
+    <button @onclick="ClearSearch">Clear</button>
+</div>
+
 @if (movies == null)
 {
     <p><em>Loading...</em></p>
+}
+else if (movies.Count == 0)
+{
+    <p>No movies found.</p>
 }
 else
 {
@@ -29,6 +40,7 @@ else
 
 @code {
     private List<Movie>? movies;
+    private string _searchQuery = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -36,6 +48,37 @@ else
         {
             var client = HttpClientFactory.CreateClient("MyHttpClient");
             movies = await client.GetFromJsonAsync<List<Movie>>("/movies");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching movies: {ex.Message}");
+        }
+    }
+
+    private async Task Search()
+    {
+        try
+        {
+            var client = HttpClientFactory.CreateClient("MyHttpClient");
+            var encodedQuery = Uri.EscapeDataString(_searchQuery);
+            movies = await client.GetFromJsonAsync<List<Movie>>($"/movies/search?query={encodedQuery}");
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching movies: {ex.Message}");
+            movies = new List<Movie>();
+        }
+    }
+
+    private async Task ClearSearch()
+    {
+        _searchQuery = "";
+        try
+        {
+            var client = HttpClientFactory.CreateClient("MyHttpClient");
+            movies = await client.GetFromJsonAsync<List<Movie>>("/movies");
+            StateHasChanged();
         }
         catch (Exception ex)
         {
