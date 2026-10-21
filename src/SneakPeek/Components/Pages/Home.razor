@@ -1,4 +1,5 @@
 ﻿@page "/"
+@rendermode InteractiveServer
 @inject IHttpClientFactory HttpClientFactory
 @using SneakPeek.Models
 
@@ -6,9 +7,19 @@
 
 <h1>Movie List</h1>
 
+<div class="search-box">
+    <input type="text" @bind="_searchQuery" placeholder="Movie search..." />
+    <button @onclick="Search">Search</button>
+    <button @onclick="ClearSearch">Clear</button>
+</div>
+
 @if (movies == null)
 {
     <p><em>Loading...</em></p>
+}
+else if (movies.Count == 0)
+{
+    <p>No movies found.</p>
 }
 else
 {
@@ -29,17 +40,42 @@ else
 
 @code {
     private List<Movie>? movies;
+    private string _searchQuery = "";
 
     protected override async Task OnInitializedAsync()
+    {
+        await LoadMoviesAsync("/movies");
+    }
+
+    private async Task Search()
+    {
+        var encodedQuery = Uri.EscapeDataString(_searchQuery);
+        await LoadMoviesAsync($"/movies/search?query={encodedQuery}");
+    }
+
+    private async Task ClearSearch()
+    {
+        _searchQuery = "";
+        await LoadMoviesAsync("/movies");
+    }
+
+    private async Task LoadMoviesAsync(string url)
     {
         try
         {
             var client = HttpClientFactory.CreateClient("MyHttpClient");
-            movies = await client.GetFromJsonAsync<List<Movie>>("/movies");
+            movies = await client.GetFromJsonAsync<List<Movie>>(url);
         }
-        catch (Exception ex)
+        catch (Exception ex) when (ex is HttpRequestException
+                                 or NotSupportedException
+                                 or System.Text.Json.JsonException)
         {
             Console.WriteLine($"Error fetching movies: {ex.Message}");
+            movies = new List<Movie>();
+        }
+        finally
+        {
+            StateHasChanged();
         }
     }
 }

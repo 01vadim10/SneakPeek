@@ -13,5 +13,7 @@ public interface IMoviesRepository
     Task UpdateMovieAsync(Movie movie);
 
     Task DeleteMovieAsync(int id);
+
+    Task<List<Movie>> SearchMoviesAsync(string query);
 }
 

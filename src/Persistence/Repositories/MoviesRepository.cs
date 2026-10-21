@@ -52,4 +52,20 @@ public class MoviesRepository : IMoviesRepository
             await _context.SaveChangesAsync(); 
         }
     }
+
+    public async Task<List<Movie>> SearchMoviesAsync(string query)
+    {
+        if (string.IsNullOrWhiteSpace(query))
+        {
+            return await _context.Movies.ToListAsync();
+        }
+
+        var allMovies = await _context.Movies.ToListAsync();
+
+        return allMovies
+            .Where(m => m.Title.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                        m.Genre.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                        (m.Directors != null && m.Directors.Any(d => d.Contains(query, StringComparison.OrdinalIgnoreCase))))
+            .ToList();
+    }
 }

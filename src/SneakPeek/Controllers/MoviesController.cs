@@ -18,4 +18,13 @@ public class MoviesController(IMoviesRepository moviesRepository) : ControllerBa
         return Ok(movies);
     }
 
+    [HttpGet("search")]
+    public async Task<IActionResult> SearchMovies([FromQuery] string query) 
+    {
+        var movies = await moviesRepository.SearchMoviesAsync(query);
+        if (movies == null || movies.Count == 0)
+            return NotFound("No movies found.");
+
+        return Ok(movies);
+    }
 }
